@@ -64,7 +64,7 @@ GameObject:
   - component: {fileID: 8271322496300718460}
   - component: {fileID: 8271322496300718455}
   - component: {fileID: 8271322496300718452}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -214,6 +214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b0010307e3829d40ba462b2035b06d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _followTarget: {fileID: 8271322497663887475}
   _playerDamageDealer: {fileID: 8271322496045764566}
 --- !u!1 &8271322497663887475
 GameObject:

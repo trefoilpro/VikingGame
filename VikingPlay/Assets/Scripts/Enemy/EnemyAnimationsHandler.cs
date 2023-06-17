@@ -36,7 +36,6 @@ public class EnemyAnimationsHandler : MonoBehaviour
             }
             case TypesOfAnimations.Walk:
             {
-                Debug.Log("TypesOfAnimations.Walk");
                 _enemyAnimator.SetBool("IsMoving", true);
                 _enemyAnimator.SetBool("IsRunning", false);
                 break;

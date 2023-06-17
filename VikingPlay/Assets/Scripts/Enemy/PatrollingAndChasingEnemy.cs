@@ -12,7 +12,7 @@ public class PatrollingAndChasingEnemy : MonoBehaviour
     [SerializeField] private float _viewAngle;
     [SerializeField] private LayerMask _playerMask;
     [SerializeField] private LayerMask _obstacleMask;
-    [SerializeField] private GameObject _map;
+    private GameObject _map;
     
     private Vector3 _currentWayPoint;
 
@@ -119,6 +119,9 @@ public class PatrollingAndChasingEnemy : MonoBehaviour
 
     private void Patroling()
     {
+        if (Player.Instance == null)
+            return;
+
         _navMeshAgent.SetDestination(_currentWayPoint);
         
         if (_navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance)
@@ -145,7 +148,6 @@ public class PatrollingAndChasingEnemy : MonoBehaviour
 
     void Stop()
     {
-        Debug.Log("Stop()");
         _enemyAnimationsHandler.SetEnemyAnimation(EnemyAnimationsHandler.TypesOfAnimations.Idle);
         _navMeshAgent.isStopped = true;
         _navMeshAgent.speed = 0;
@@ -153,7 +155,6 @@ public class PatrollingAndChasingEnemy : MonoBehaviour
 
     void Move(float speed)
     {
-        Debug.Log("Move()");
         _enemyAnimationsHandler.SetEnemyAnimation(EnemyAnimationsHandler.TypesOfAnimations.Walk);
         _navMeshAgent.isStopped = false;
         _navMeshAgent.speed = speed;

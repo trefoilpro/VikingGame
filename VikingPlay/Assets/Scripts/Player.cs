@@ -3,7 +3,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, ICharacter
 {
+    [SerializeField] private GameObject _followTarget;
     [SerializeField] private DamageDealer _playerDamageDealer;
+    public GameObject GetFollowTarget() => _followTarget;
     public int Health { get; set; }
     public int Damage { get; set; }
 
@@ -24,7 +26,8 @@ public class Player : MonoBehaviour, ICharacter
     
     public void TakeDamage(int damage)
     {
-        
+        Health -= damage;
+        Debug.Log("Player Health = " + Health);
     }
     
 
@@ -34,6 +37,11 @@ public class Player : MonoBehaviour, ICharacter
         CanMove = true;
     }
 
+    public void Initialize(int health, int damage)
+    {
+        Health = health;
+        Damage = damage;
+    }
 }
 
 
