@@ -1,16 +1,14 @@
-using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageDealer : MonoBehaviour
+public class EnemyDamageDealer : MonoBehaviour
 {
     private bool _canDealDamage;
     private List<GameObject> _hasDealtDamage;
 
     [SerializeField] private float _weaponLength;
-    [SerializeField] private float _weaponDamage;
-    
-    [SerializeField] private LayerMask _opponentLayers;
+    [SerializeField] private Enemy _enemy;
     private void Start()
     {
         _canDealDamage = false;
@@ -21,16 +19,16 @@ public class DamageDealer : MonoBehaviour
     {
         if (_canDealDamage)
         {
-            int layerMask = 1 << 8;
+            int layerMask = 1 << 6;
             Collider[] colliders = Physics.OverlapSphere(transform.position, _weaponLength, layerMask);
             
             foreach (Collider collider in colliders)
             {
-                if (!_hasDealtDamage.Contains(collider.gameObject) && collider.gameObject.TryGetComponent(out Enemy enemy))
+                if (!_hasDealtDamage.Contains(collider.gameObject) && collider.gameObject.TryGetComponent(out Player player))
                 {
-                    enemy.TakeDamage(Player.Instance.Damage);
+                    player.TakeDamage(_enemy.Damage);
                     _hasDealtDamage.Add(collider.gameObject);
-                    Debug.Log("Dealt damage to " + collider.gameObject.name);
+                    
                 }
             }
         }

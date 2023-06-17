@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PatrollingAndChasingEnemy : MonoBehaviour
 {
+    [SerializeField] private Enemy _enemy;
     [SerializeField] private EnemyAnimationsHandler _enemyAnimationsHandler;
     [SerializeField] private UnityEngine.AI.NavMeshAgent _navMeshAgent;
     [SerializeField] private Collider _enemyCollider;
@@ -68,11 +67,24 @@ public class PatrollingAndChasingEnemy : MonoBehaviour
 
     private void Chasing()
     {
-        
+        if (!_enemy.CanMove)
+        {
+            _navMeshAgent.isStopped = true;
+            return;
+        }
         
         Vector3 dirToPlayer = (Player.Instance.transform.position - transform.position).normalized;
         float dstToPlayer = Vector3.Distance(transform.position, Player.Instance.transform.position);
 
+        
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 1.5f, _playerMask);
+            
+        foreach (Collider collider in colliders)
+        {
+            _enemyAnimationsHandler.SetEnemyAnimation(EnemyAnimationsHandler.TypesOfAnimations.Attack);
+            _enemy.SetCanMove(false);
+        }
+        
         if (!Physics.Raycast(transform.position, dirToPlayer, dstToPlayer, _obstacleMask))
         {
             Run(_speedRun);
@@ -188,14 +200,10 @@ public class PatrollingAndChasingEnemy : MonoBehaviour
             }
         }
     }
-
-
-    private void OnCollisionEnter(Collision collision)
+    
+    private void OnDrawGizmos()
     {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            _enemyCollider.enabled = false;
-            //KillPlayer();
-        }
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, 1.5f);
     }
 }

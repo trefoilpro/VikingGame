@@ -351,6 +351,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyAnimator: {fileID: 432470851}
+  _enemyDamageDealer: {fileID: 0}
+  _enemy: {fileID: 1509380420}
 --- !u!1 &483858109
 GameObject:
   m_ObjectHideFlags: 0
@@ -453,7 +455,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: -4728426434207774260, guid: 67b75a162b24af1419a98606d329d550, type: 3}
   m_PrefabInstance: {fileID: 1903644155}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &684620970
+--- !u!114 &684620972
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -462,14 +464,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 684620968}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3892e232eae715f42bd254167d4cde9b, type: 3}
+  m_Script: {fileID: 11500000, guid: f38a27b138ef4908bd76caefa028a0ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _weaponLength: 0.27
-  _weaponDamage: 0
-  _opponentLayers:
-    serializedVersion: 2
-    m_Bits: 0
+  _weaponLength: 0.7
+  _enemy: {fileID: 1509380420}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -991,6 +990,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcf057cac782b9b4eb63e40df5722b48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemy: {fileID: 1509380420}
   _enemyAnimationsHandler: {fileID: 432470852}
   _navMeshAgent: {fileID: 1509380424}
   _enemyCollider: {fileID: 1509380422}
@@ -1019,7 +1019,7 @@ NavMeshAgent:
   m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 720
-  m_StoppingDistance: 0.8
+  m_StoppingDistance: 1.5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -1574,11 +1574,11 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 8656bb422b6103a4dbc9359d0990df06, type: 2}
     - target: {fileID: 6502182839619065283, guid: 67b75a162b24af1419a98606d329d550, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.171
+      value: 0.044
       objectReference: {fileID: 0}
     - target: {fileID: 6502182839619065283, guid: 67b75a162b24af1419a98606d329d550, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.69
+      value: 0.545
       objectReference: {fileID: 0}
     - target: {fileID: 6502182839619065283, guid: 67b75a162b24af1419a98606d329d550, type: 3}
       propertyPath: m_LocalPosition.z

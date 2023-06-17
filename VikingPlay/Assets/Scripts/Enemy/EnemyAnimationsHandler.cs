@@ -5,13 +5,16 @@ using UnityEngine;
 public class EnemyAnimationsHandler : MonoBehaviour
 {
     [SerializeField] private Animator _enemyAnimator;
+    [SerializeField] private EnemyDamageDealer _enemyDamageDealer;
+    [SerializeField] private Enemy _enemy;
 
     public enum TypesOfAnimations
     {
         Idle,
         Walk,
         Run,
-        KillPlayer,
+        Attack,
+        Die,
     }
 
     private TypesOfAnimations _enemyTypeOfMoving = TypesOfAnimations.Idle;
@@ -44,12 +47,32 @@ public class EnemyAnimationsHandler : MonoBehaviour
                 _enemyAnimator.SetBool("IsRunning", true);
                 break;
             }
-            case TypesOfAnimations.KillPlayer:
+            case TypesOfAnimations.Attack:
             {
-                _enemyAnimator.SetTrigger("KillPlayer");
+                _enemyAnimator.SetTrigger("Attack");
                 //_enemyAnimator.Play("KillPlayer");
                 break;
             }
+            case TypesOfAnimations.Die:
+            {
+                _enemyAnimator.SetTrigger("Die");
+                break;
+            }
         }
+    }
+
+    public void StartDealDamage()
+    {
+        _enemyDamageDealer.StartDealingDamage();
+    }
+
+    public void EndDealDamage()
+    {
+        _enemyDamageDealer.EndDealingDamage();
+    }
+    
+    public void EndAnimationAttack()
+    {
+        _enemy.SetCanMove(true);
     }
 }
