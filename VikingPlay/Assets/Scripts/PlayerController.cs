@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,10 +6,13 @@ using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerInput))]
+[RequireComponent(typeof(NavMeshAgent))]
+
 
 public class PlayerController : MonoBehaviour
 {
-     private NavMeshAgent _agent;
+    [SerializeField] private GameObject _playerModel;
+    private NavMeshAgent _agent;
     public Vector2 _move;
     public Vector2 _look;
     public float aimValue;
@@ -49,7 +53,7 @@ public class PlayerController : MonoBehaviour
         #region Player Based Rotation
         
         //Move the player based on the X input on the controller
-        //transform.rotation *= Quaternion.AngleAxis(_look.x * rotationPower, Vector3.up);
+        //_playerModel.transform.rotation *= Quaternion.AngleAxis(_look.x * rotationPower, Vector3.up);
 
         #endregion
 
@@ -85,10 +89,10 @@ public class PlayerController : MonoBehaviour
 
         
         
-        //nextRotation = Quaternion.Lerp(followTransform.transform.rotation, nextRotation, Time.deltaTime * rotationLerp);
+        nextRotation = Quaternion.Lerp(followTransform.transform.rotation, nextRotation, Time.deltaTime * rotationLerp );
 
-        //nextRotation = new Quaternion(0, followTransform.transform.rotation.eulerAngles.y, 0, 0);
-        
+        nextRotation = new Quaternion(0, followTransform.transform.rotation.eulerAngles.y, 0, 0);
+        Debug.Log("_move.x = " + _move.x + " _move.y = " + _move.y);
         if (_move.x == 0 && _move.y == 0) 
         {   
             nextPosition = transform.position;
@@ -104,10 +108,11 @@ public class PlayerController : MonoBehaviour
             return; 
         }
         
-        
+        Debug.Log("After Return");
         //движение
         float moveSpeed = speed / 100f;
-        Vector3 position = (transform.forward * _move.y * moveSpeed) + (transform.right * _move.x * moveSpeed);
+        Vector3 position = (_playerModel.transform.forward * Math.Abs(_move.y) * moveSpeed) + (_playerModel.transform.forward * Math.Abs(_move.x) * moveSpeed);
+        Debug.Log("transform.forward = " + transform.forward + "transform.right = " + transform.right);
         nextPosition = transform.position + position;        
         
         
@@ -119,23 +124,43 @@ public class PlayerController : MonoBehaviour
         
         //reset the y rotation of the look transform
 
-        Vector3 newAngles = followTransform.transform.rotation.eulerAngles;
+        Vector3 newAngles = Vector3.zero;
+        
 
+        float newAngleX;
         float newAngleY;
-        if (_move.x > 0)
-        {
-            newAngleY = 0;
-        }
-        else
-        {
-            newAngleY = 180;
-        }
         
-        newAngles.y += (_move.x * 90 + _move.x * newAngleY) / 2;
-        
-        transform.rotation = Quaternion.Euler(0, newAngles.y, 0);
+        newAngleY = _move.y > 0 ? 0 : 180;
 
-        followTransform.transform.localEulerAngles = new Vector3(angles.x, newAngles.y, 0);
+        newAngleX = _move.x > 0 ? 1 : -1;
+        
+        if(_move.x > 0 || _move.x < 0)
+        {
+            if (_move.y == 0)
+            {
+                newAngles.y += 90 * newAngleX;
+            }
+            else
+            {
+                newAngles.y += (newAngleX * 90 + newAngleX * newAngleY) / 2;
+            }
+        }
+        else if (_move.x == 0)
+        {
+            newAngles.y += newAngleY;
+        }
+        
+        
+        
+        Quaternion newQuaternion = Quaternion.Euler(0, angles.y + newAngles.y, 0);
+        
+        _playerModel.transform.rotation = Quaternion.Lerp(_playerModel.transform.rotation, newQuaternion, Time.deltaTime * rotationLerp * 50);
+        
+        //_playerModel.transform.localEulerAngles = new Vector3(0, angles.y + newAngles.y, 0);
+        Debug.Log(  " newQuaternion = " + newQuaternion + "newAngles.y = " + newAngles.y + " _playerModel.transform.localEulerAngles = " + _playerModel.transform.localEulerAngles + "Quaternion.Euler(0, angles.y + newAngles.y, 0); = " + new Vector3(0, angles.y + newAngles.y, 0) + " followTransform.transform.localEulerAngles = " + followTransform.transform.localEulerAngles);
+
+        //followTransform.transform.localEulerAngles = new Vector3(angles.x, 0, 0);
         
     }
+    
 }

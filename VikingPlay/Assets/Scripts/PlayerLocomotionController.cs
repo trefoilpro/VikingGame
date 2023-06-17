@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerLocomotionController : MonoBehaviour
 {
-    private Animator _animator;
+    [SerializeField] private Animator _animator;
     private PlayerController _movement;
 
     private Vector2 smoothDeltaPosition = Vector2.zero;
@@ -12,7 +12,6 @@ public class PlayerLocomotionController : MonoBehaviour
     private void OnEnable()
     {
         _movement = GetComponent<PlayerController>();
-        _animator = GetComponent<Animator>();
     }
     public bool shouldMove;
     public bool shouldTurn;
@@ -33,6 +32,8 @@ public class PlayerLocomotionController : MonoBehaviour
 
         float smooth = Mathf.Min(1.0f, Time.deltaTime / 0.15f);
         smoothDeltaPosition = Vector2.Lerp(smoothDeltaPosition, deltaPosition, smooth);
+        
+        
 
         if (Time.deltaTime > 1e-5f)
         {
@@ -41,6 +42,8 @@ public class PlayerLocomotionController : MonoBehaviour
 
         shouldMove = velocity.magnitude > magnitude;
 
+        
+        
         bool isAiming = (_movement.aimValue == 1f);
 
         
@@ -55,6 +58,7 @@ public class PlayerLocomotionController : MonoBehaviour
     {
         //Update the position based on the next position;
         transform.position = _movement.nextPosition;
+        Debug.Log("OnAnimatorMove");
     }
 
 
