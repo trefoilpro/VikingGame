@@ -135,7 +135,6 @@ GameObject:
   - component: {fileID: 316357254}
   - component: {fileID: 316357253}
   - component: {fileID: 316357252}
-  - component: {fileID: 316357251}
   - component: {fileID: 316357250}
   - component: {fileID: 316357257}
   - component: {fileID: 316357258}
@@ -161,25 +160,6 @@ CapsuleCollider:
   m_Height: 2.24
   m_Direction: 1
   m_Center: {x: 0, y: 1.09, z: 0}
---- !u!114 &316357251
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 316357249}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed9949a3e6499c341967b8cd7cb41fb3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _animator: {fileID: 1963994657}
-  velocity: {x: 0, y: 0}
-  magnitude: 0.4
-  shouldMove: 0
-  shouldTurn: 0
-  turn: 0
-  look: {fileID: 1134250893}
 --- !u!114 &316357252
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,6 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerModel: {fileID: 1963994651}
+  _playerMover: {fileID: 1963994658}
   _move: {x: 0, y: 0}
   _look: {x: 0, y: 0}
   aimValue: 0
@@ -1012,6 +993,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 0}
+  _movement: {fileID: 0}
+  smoothDeltaPosition: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   magnitude: 0.4
   shouldMove: 0
@@ -1031,6 +1014,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerModel: {fileID: 0}
+  _playerMover: {fileID: 0}
   _move: {x: 0, y: 0}
   _look: {x: 0, y: 0}
   aimValue: 0
@@ -1181,6 +1165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerModel: {fileID: 0}
+  _playerMover: {fileID: 0}
   _move: {x: 0, y: 0}
   _look: {x: 0, y: 0}
   aimValue: 0
@@ -1204,6 +1189,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 0}
+  _movement: {fileID: 0}
+  smoothDeltaPosition: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   magnitude: 0.4
   shouldMove: 0
@@ -1546,11 +1533,6 @@ CharacterController:
 --- !u!4 &1963994656 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 31f40719396efdb4a87015a94a0abb1c, type: 3}
-  m_PrefabInstance: {fileID: 2129459269}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1963994657 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 31f40719396efdb4a87015a94a0abb1c, type: 3}
   m_PrefabInstance: {fileID: 2129459269}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1963994658
