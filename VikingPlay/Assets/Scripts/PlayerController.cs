@@ -1,16 +1,13 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerInput))]
-[RequireComponent(typeof(NavMeshAgent))]
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private GameObject _playerModel;
-    [SerializeField] private PlayerMover _playerMover;
+    [SerializeField] private PlayerAnimationController playerAnimationController;
     private NavMeshAgent _agent;
     public Vector2 _move;
     public Vector2 _look;
@@ -41,7 +38,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    public void OnFire(InputValue value)
+    public void OnAttack(InputValue value)
     {
         fireValue = value.Get<float>();
     }
@@ -50,6 +47,9 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        
+        Debug.Log("Firevalue: " + fireValue);
+        
         if (!Player.Instance.CanMove)
         {
             nextPosition = transform.position;
@@ -59,10 +59,10 @@ public class PlayerController : MonoBehaviour
         if (fireValue > 0)
         {
             Attack();
+            fireValue = 0;
             return;
         }
 
-        Debug.Log("fireValue = " + fireValue);
         
         followTransform.transform.rotation *= Quaternion.AngleAxis(_look.x * rotationPower, Vector3.up);
 
@@ -91,9 +91,9 @@ public class PlayerController : MonoBehaviour
             Time.deltaTime * rotationLerp);
 
         nextRotation = new Quaternion(0, followTransform.transform.rotation.eulerAngles.y, 0, 0);
-        Debug.Log("_move.x = " + _move.x + " _move.y = " + _move.y);
         if (_move.x == 0 && _move.y == 0)
         {
+            playerAnimationController.SetAnimation(PlayerAnimationController.TypesOfAnimation.Idle);
             nextPosition = transform.position;
 
             /*if (aimValue == 1)
@@ -112,6 +112,8 @@ public class PlayerController : MonoBehaviour
         Vector3 position = (_playerModel.transform.forward * Math.Abs(_move.y) * moveSpeed) +
                            (_playerModel.transform.forward * Math.Abs(_move.x) * moveSpeed);
         nextPosition = transform.position + position;
+        
+        playerAnimationController.SetAnimation(PlayerAnimationController.TypesOfAnimation.Run);
 
 
         Vector3 newAngles = Vector3.zero;
@@ -154,6 +156,6 @@ public class PlayerController : MonoBehaviour
     {
         Player.Instance.SetCanMove(false);
         
-        _playerMover.SetAnimation(PlayerMover.TypesOfAnimation.Attack);
+        playerAnimationController.SetAnimation(PlayerAnimationController.TypesOfAnimation.Attack);
     }
 }
