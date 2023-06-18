@@ -8,6 +8,8 @@ public class Player : MonoBehaviour, ICharacter
     [SerializeField] private PlayerAnimationController _playerAnimationController;
     [SerializeField] private Collider _playerCollider;
     [SerializeField] private Rigidbody _playerRigidbody;
+
+    private PlayerHealthBar _playerHealthBar;
     public GameObject GetFollowTarget() => _followTarget;
     public bool IsDead { get; private set; }
     public int CurrentHealth { get; private set; }
@@ -26,6 +28,8 @@ public class Player : MonoBehaviour, ICharacter
     public void TakeDamage(int damage)
     {
         CurrentHealth -= damage;
+        
+        
 
         Debug.Log("CurrentHealth: " + CurrentHealth);
         
@@ -37,7 +41,12 @@ public class Player : MonoBehaviour, ICharacter
             _playerCollider.enabled = false;
             _playerRigidbody.constraints = RigidbodyConstraints.FreezePosition;
             GameManager.Instance.GameOver();
+            _playerHealthBar.SetHealth(0);
+            return;
         }
+        
+        _playerHealthBar.SetHealth(CurrentHealth);
+        
     }
     
 
@@ -47,11 +56,14 @@ public class Player : MonoBehaviour, ICharacter
         CanMove = true;
     }
 
-    public void Initialize(int health, int damage)
+    public void Initialize(int health, int damage, PlayerHealthBar playerHealthBar)
     {
         MaxHealth = health;
         CurrentHealth = health;
         Damage = damage;
+        _playerHealthBar = playerHealthBar;
+        _playerHealthBar.SetMaxHealth(MaxHealth);
+        _playerHealthBar.SetHealth(CurrentHealth);
     }
 }
 
