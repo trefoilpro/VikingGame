@@ -46,7 +46,8 @@ public class PatrollingAndChasingEnemy : MonoBehaviour
         _navMeshAgent.speed = _speedWalk;
         Move(_speedWalk);
         
-        _currentWayPoint = RandomPointGenerator.Instance.GetRandomPointOnNavMesh(1000f, transform.position);
+        
+        _currentWayPoint = RandomPointGenerator.GetRandomPointOnNavMesh(250f, transform.position);
         _navMeshAgent.SetDestination(_currentWayPoint);
     }
 
@@ -101,7 +102,7 @@ public class PatrollingAndChasingEnemy : MonoBehaviour
                 m_IsPatrol = true;
                 Move(_speedWalk);
                 m_WaitTimeAfterLostPlayer = _waitTimeAfterLostPlayer;
-                _currentWayPoint = RandomPointGenerator.Instance.GetRandomPointOnNavMesh(10f, transform.position);
+                /*_currentWayPoint = RandomPointGenerator.Instance.GetRandomPointOnNavMesh(10f, transform.position);*/
                 _navMeshAgent.SetDestination(_currentWayPoint);
             }
             else
@@ -141,7 +142,7 @@ public class PatrollingAndChasingEnemy : MonoBehaviour
 
     public void NextPoint()
     {
-        _currentWayPoint = RandomPointGenerator.Instance.GetRandomPointOnNavMesh(10f, transform.position);
+        /*_currentWayPoint = RandomPointGenerator.Instance.GetRandomPointOnNavMesh(10f, transform.position);*/
         _navMeshAgent.SetDestination(_currentWayPoint);
     }
 

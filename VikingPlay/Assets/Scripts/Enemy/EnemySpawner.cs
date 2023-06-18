@@ -3,10 +3,17 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private Enemy _enemyPrefab;
-    [SerializeField] private RandomPointGenerator _randomPointGenerator;
-    public void SpawnEnemy(int numberOfEnemy, int enemyHealth, int enemyDamage, Vector3 spawnCenter)
+    
+    public void SpawnEnemy(int numberOfEnemy, int enemyHealth, int enemyDamage, Vector3 spawnCenter, float spawnRadius)
     {
-        Enemy enemy = Instantiate(_enemyPrefab, new Vector3(223.36f, 18.84f, -29.82f), Quaternion.identity);
-        enemy.Initialize(1, 1);
+        for (int i = 0; i < numberOfEnemy; i++)
+        {
+            
+            
+            Vector3 spawnPosition = RandomPointGenerator.GetRandomPointOnNavMesh(spawnRadius, spawnCenter);
+            Debug.Log("spawnPosition distance: " + Vector3.Distance(spawnPosition, spawnCenter));
+            Enemy enemy = Instantiate(_enemyPrefab, spawnPosition, Quaternion.identity);
+            enemy.Initialize(enemyHealth, enemyDamage, this);
+        }
     }
 }

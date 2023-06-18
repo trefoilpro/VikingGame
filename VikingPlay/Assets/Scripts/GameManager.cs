@@ -18,6 +18,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        _gameStarter.StartGame(_enemySpawner);
+        _gameStarter.StartGame();
     }
 }

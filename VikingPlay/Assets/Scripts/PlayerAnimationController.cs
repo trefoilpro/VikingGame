@@ -34,6 +34,7 @@ public class PlayerAnimationController : MonoBehaviour
                 break;
             case TypesOfAnimation.Die:
                 _animator.SetTrigger("Die");
+                _animator.SetBool("IsRunning", false);
                 break;
         }
     }

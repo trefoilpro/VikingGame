@@ -5,15 +5,14 @@ public class Player : MonoBehaviour, ICharacter
 {
     [SerializeField] private GameObject _followTarget;
     [SerializeField] private DamageDealer _playerDamageDealer;
+    [SerializeField] private PlayerAnimationController _playerAnimationController;
+    [SerializeField] private Collider _playerCollider;
+    [SerializeField] private Rigidbody _playerRigidbody;
     public GameObject GetFollowTarget() => _followTarget;
-    public int Health { get; set; }
+    
+    public int CurrentHealth { get; private set; }
+    public int MaxHealth { get; set; }
     public int Damage { get; set; }
-
-    public Player(int health, int damage)
-    {
-        Health = health;
-        Damage = damage;
-    }
 
     public DamageDealer GetPlayerDamageDealer() => _playerDamageDealer;
     public static Player Instance { get; private set; }
@@ -26,8 +25,17 @@ public class Player : MonoBehaviour, ICharacter
     
     public void TakeDamage(int damage)
     {
-        Health -= damage;
-        Debug.Log("Player Health = " + Health);
+        CurrentHealth -= damage;
+
+        Debug.Log("CurrentHealth: " + CurrentHealth);
+        
+        if (CurrentHealth <= 0)
+        {
+            CanMove = false;
+            _playerAnimationController.SetAnimation(PlayerAnimationController.TypesOfAnimation.Die);
+            _playerCollider.enabled = false;
+            _playerRigidbody.constraints = RigidbodyConstraints.FreezePosition;
+        }
     }
     
 
@@ -39,7 +47,8 @@ public class Player : MonoBehaviour, ICharacter
 
     public void Initialize(int health, int damage)
     {
-        Health = health;
+        MaxHealth = health;
+        CurrentHealth = health;
         Damage = damage;
     }
 }

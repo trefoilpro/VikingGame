@@ -5,41 +5,41 @@ public class Enemy : MonoBehaviour, ICharacter
 {
     [SerializeField] private  EnemyAnimationsHandler _enemyAnimationsHandler;
     [SerializeField] private Collider _collider;
+
+    private EnemySpawner _enemySpawner;
+    private int _startHealth;
     public bool CanMove { get; private set; }
     
-    public int Health { get; set; }
+    public int CurrentHealth { get; private set; }
+    
+    public int MaxHealth { get; set; }
     public int Damage { get; set; }
 
     public void TakeDamage(int damage)
     {
-        Health -= damage;
+        CurrentHealth -= damage;
 
-        Debug.Log("Enemy Health = " + Health);
-        
-        if (Health <= 0)
+        if (CurrentHealth <= 0)
         {
             CanMove = false;
             _enemyAnimationsHandler.SetEnemyAnimation(EnemyAnimationsHandler.TypesOfAnimations.Die);
             _collider.enabled = false;
+            _enemySpawner.SpawnEnemy(1, _startHealth + 1, 1, Player.Instance.transform.position, 200f);
         }
     }
 
     public void SetCanMove(bool variable) => CanMove = variable;
-
-    public Enemy(int health, int damage)
-    {
-        Health = health;
-        Damage = damage;
-    }
 
     private void Awake()
     {
         CanMove = true;
     }
 
-    public void Initialize(int health, int damage)
+    public void Initialize(int health, int damage, EnemySpawner enemySpawner)
     {
-        Health = health;
+        MaxHealth = health;
+        CurrentHealth = health;
         Damage = damage;
+        _enemySpawner = enemySpawner;
     }
 }
