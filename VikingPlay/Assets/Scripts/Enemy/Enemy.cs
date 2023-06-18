@@ -57,7 +57,7 @@ public class Enemy : MonoBehaviour, ICharacter
 
     public void SpawnHealthSphere()
     {
-        if (Random.Range(0, 100) < 100)
+        if (Random.Range(0, 100) < 30)
         {
             Instantiate(_healthSpherePrefab, transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
         }
