@@ -8,7 +8,7 @@ public class GameStarter : MonoBehaviour
     [SerializeField] private Enemy _enemyPrefab;
     [SerializeField] private CinemachineVirtualCamera _cinemachineVirtualCamera;
     
-    private void Start()
+    public void StartGame(EnemySpawner enemySpawner)
     {
         Player player = Instantiate(_playerPrefab, new Vector3(212.8f, 20.9f, -25.3f), Quaternion.identity);
         player.Initialize(20, 1);
