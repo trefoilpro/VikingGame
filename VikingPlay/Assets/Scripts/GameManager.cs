@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Score _score;
     [SerializeField] private GameOverMenu _gameOverMenu;
 
+    public Score GetScore() => _score;
+    
     private void Awake()
     {
         Instance = this;

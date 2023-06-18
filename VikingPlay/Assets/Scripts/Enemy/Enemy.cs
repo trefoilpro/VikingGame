@@ -7,7 +7,6 @@ public class Enemy : MonoBehaviour, ICharacter
     [SerializeField] private Collider _collider;
 
     private EnemySpawner _enemySpawner;
-    private int _startHealth;
     public bool CanMove { get; private set; }
     
     public int CurrentHealth { get; private set; }
@@ -24,7 +23,8 @@ public class Enemy : MonoBehaviour, ICharacter
             CanMove = false;
             _enemyAnimationsHandler.SetEnemyAnimation(EnemyAnimationsHandler.TypesOfAnimations.Die);
             _collider.enabled = false;
-            _enemySpawner.SpawnEnemy(1, _startHealth + 1, 1, Player.Instance.transform.position, 200f);
+            GameManager.Instance.GetScore().AddScore(1);
+            _enemySpawner.SpawnEnemy(1, MaxHealth + 1, 1, Player.Instance.transform.position, 200f);
         }
     }
 

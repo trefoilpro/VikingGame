@@ -36,7 +36,12 @@ public class GameOverMenu : MonoBehaviour
     private void SetScoreText()
     {
         _scoreText.text = "Your Score: " + _score.ScoreNumber;
-        _highScoreText.text = "High Score: ";
+        
+        
+        
+        _highScoreText.text = "High Score: " + PlayerPrefs.GetInt("HighScore", 0).ToString();
     }
+    
+    
     
 }

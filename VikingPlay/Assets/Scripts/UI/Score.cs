@@ -11,12 +11,12 @@ public class Score : MonoBehaviour
     public void AddScore(int score)
     {
         ScoreNumber += score;
-        _scoreText.text = ScoreNumber.ToString();
-    }
+        
+        if (ScoreNumber > PlayerPrefs.GetInt("HighScore", 0))
+        {
+            PlayerPrefs.SetInt("HighScore", ScoreNumber);
+        }
 
-    public void ResetScore()
-    {
-        ScoreNumber = 0;
         _scoreText.text = ScoreNumber.ToString();
     }
 }
