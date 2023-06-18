@@ -1,16 +1,14 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class DamageDealer : MonoBehaviour
 {
+    [SerializeField] private float _weaponLength;
+    
     private bool _canDealDamage;
     private List<GameObject> _hasDealtDamage;
 
-    [SerializeField] private float _weaponLength;
-    [SerializeField] private float _weaponDamage;
     
-    [SerializeField] private LayerMask _opponentLayers;
     private void Start()
     {
         _canDealDamage = false;
@@ -30,7 +28,6 @@ public class DamageDealer : MonoBehaviour
                 {
                     enemy.TakeDamage(Player.Instance.Damage);
                     _hasDealtDamage.Add(collider.gameObject);
-                    Debug.Log("Dealt damage to " + collider.gameObject.name);
                 }
             }
         }

@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour, ICharacter
     public void TakeDamage(int damage)
     {
         CurrentHealth -= damage;
+        _enemyAnimationsHandler.OnHit();
 
         if (CurrentHealth <= 0)
         {

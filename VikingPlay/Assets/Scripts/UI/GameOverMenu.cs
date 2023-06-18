@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -39,7 +37,7 @@ public class GameOverMenu : MonoBehaviour
         
         
         
-        _highScoreText.text = "High Score: " + PlayerPrefs.GetInt("HighScore", 0).ToString();
+        _highScoreText.text = "High Score: " + PlayerPrefs.GetInt("HighScore", 0);
     }
     
     

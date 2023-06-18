@@ -5,7 +5,6 @@ public class PatrollingAndChasingEnemy : MonoBehaviour
     [SerializeField] private Enemy _enemy;
     [SerializeField] private EnemyAnimationsHandler _enemyAnimationsHandler;
     [SerializeField] private UnityEngine.AI.NavMeshAgent _navMeshAgent;
-    [SerializeField] private Collider _enemyCollider;
     [SerializeField] private float _speedWalk;
     [SerializeField] private float _speedRun;
     [SerializeField] private float _viewRadius;
@@ -51,7 +50,7 @@ public class PatrollingAndChasingEnemy : MonoBehaviour
             {
                 _navMeshAgent.isStopped = true;
                 _enemyAnimationsHandler.SetEnemyAnimation(EnemyAnimationsHandler.TypesOfAnimations.Idle);
-                this.enabled = false;
+                enabled = false;
                 return;
             }
         }
@@ -104,18 +103,12 @@ public class PatrollingAndChasingEnemy : MonoBehaviour
                 m_IsPatrol = true;
                 Move(_speedWalk);
                 m_WaitTimeAfterLostPlayer = _waitTimeAfterLostPlayer;
-                /*_currentWayPoint = RandomPointGenerator.Instance.GetRandomPointOnNavMesh(10f, transform.position);*/
                 _navMeshAgent.SetDestination(_currentWayPoint);
             }
             else
             {
-                /*if (Vector3.Distance(transform.position,
-                        Player.Instance.gameObject.transform.position) >= 2.5f)
-                    Stop();*/
                 m_WaitTimeAfterLostPlayer -= Time.deltaTime;
             }
-
-            Debug.Log("m_WaitTime = " + m_WaitTimeAfterLostPlayer);
         }
     }
 
@@ -144,7 +137,6 @@ public class PatrollingAndChasingEnemy : MonoBehaviour
 
     public void NextPoint()
     {
-        /*_currentWayPoint = RandomPointGenerator.Instance.GetRandomPointOnNavMesh(10f, transform.position);*/
         _navMeshAgent.SetDestination(_currentWayPoint);
     }
 
@@ -190,7 +182,6 @@ public class PatrollingAndChasingEnemy : MonoBehaviour
                 }
             }
             
-
             if (!m_IsPatrol)
             {
                 m_PlayerPosition = player.position;

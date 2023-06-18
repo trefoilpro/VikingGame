@@ -12,7 +12,6 @@ public class EnemySpawner : MonoBehaviour
             
             
             Vector3 spawnPosition = RandomPointGenerator.GetRandomPointOnNavMesh(spawnRadius, spawnCenter);
-            Debug.Log("spawnPosition distance: " + Vector3.Distance(spawnPosition, spawnCenter));
             Enemy enemy = Instantiate(_enemyPrefab, spawnPosition, Quaternion.identity);
             enemy.Initialize(enemyHealth, enemyDamage, this, _camera);
         }

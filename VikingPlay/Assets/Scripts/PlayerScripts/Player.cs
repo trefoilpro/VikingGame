@@ -29,8 +29,6 @@ public class Player : MonoBehaviour, ICharacter
     {
         CurrentHealth -= damage;
         
-        Debug.Log("CurrentHealth: " + CurrentHealth);
-        
         if (CurrentHealth <= 0)
         {
             IsDead = true;

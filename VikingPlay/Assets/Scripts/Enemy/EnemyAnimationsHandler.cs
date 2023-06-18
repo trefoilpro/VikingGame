@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyAnimationsHandler : MonoBehaviour
@@ -7,6 +5,7 @@ public class EnemyAnimationsHandler : MonoBehaviour
     [SerializeField] private Animator _enemyAnimator;
     [SerializeField] private EnemyDamageDealer _enemyDamageDealer;
     [SerializeField] private Enemy _enemy;
+    [SerializeField] private EnemyAudio _enemyAudio;
 
     public enum TypesOfAnimations
     {
@@ -63,6 +62,7 @@ public class EnemyAnimationsHandler : MonoBehaviour
     public void StartDealDamage()
     {
         _enemyDamageDealer.StartDealingDamage();
+        OnAttack();
     }
 
     public void EndDealDamage()
@@ -79,5 +79,25 @@ public class EnemyAnimationsHandler : MonoBehaviour
     {
         _enemy.GetHealthBar().gameObject.SetActive(false);
         _enemy.SpawnHealthSphere();
+    }
+
+    public void OnFootstep()
+    {
+        _enemyAudio.PlayFootStepSound();
+    }
+    
+    public void OnHit()
+    {
+        _enemyAudio.PlayHitSound();
+    }
+
+    public void OnDie()
+    {
+        _enemyAudio.PlayDieSound();
+    }
+    
+    public void OnAttack()
+    {
+        _enemyAudio.PlayAttackSound();
     }
 }

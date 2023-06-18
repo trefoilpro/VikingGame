@@ -45,10 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponLength: 0.33
-  _weaponDamage: 0
-  _opponentLayers:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!1 &8271322496300718463
 GameObject:
   m_ObjectHideFlags: 0
@@ -150,13 +146,12 @@ MonoBehaviour:
   playerAnimationController: {fileID: 8271322496749833692}
   _move: {x: 0, y: 0}
   _look: {x: 0, y: 0}
-  aimValue: 0
   fireValue: 0
   nextPosition: {x: 0, y: 0, z: 0}
   nextRotation: {x: 0, y: 0, z: 0, w: 0}
   rotationPower: 0.1
   rotationLerp: 0.5
-  speed: 3
+  speed: 6
   followTransform: {fileID: 8271322497663887475}
 --- !u!136 &8271322496300718460
 CapsuleCollider:

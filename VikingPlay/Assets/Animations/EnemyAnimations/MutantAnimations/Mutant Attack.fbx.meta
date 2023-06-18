@@ -78,6 +78,27 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.2004689
+        functionName: OnFootstep
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 74780d6fc46b7e44ebc1bc53847f5815, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.5052754
+        functionName: OnFootstep
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 74780d6fc46b7e44ebc1bc53847f5815, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.8218053
+        functionName: OnFootstep
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 74780d6fc46b7e44ebc1bc53847f5815, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}

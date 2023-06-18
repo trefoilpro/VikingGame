@@ -4,7 +4,6 @@ using UnityEngine;
 public class GameStarter : MonoBehaviour
 {
     [SerializeField] private Player _playerPrefab;
-    [SerializeField] private Enemy _enemyPrefab;
     [SerializeField] private int _numberOfEnemy;
     [SerializeField] private EnemySpawner _enemySpawner;
     [SerializeField] private CinemachineVirtualCamera _cinemachineVirtualCamera;
@@ -14,7 +13,7 @@ public class GameStarter : MonoBehaviour
     public void StartGame()
     {
         Player player = Instantiate(_playerPrefab, _mapCenter.transform.position, Quaternion.identity);
-        player.Initialize(20, 1, healthBar);
+        player.Initialize(3, 1, healthBar);
 
         _cinemachineVirtualCamera.LookAt = player.GetFollowTarget().transform;
         _cinemachineVirtualCamera.Follow = player.GetFollowTarget().transform;

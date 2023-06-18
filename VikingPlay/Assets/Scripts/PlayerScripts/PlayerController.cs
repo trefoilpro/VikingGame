@@ -11,7 +11,6 @@ public class PlayerController : MonoBehaviour
     private NavMeshAgent _agent;
     public Vector2 _move;
     public Vector2 _look;
-    public float aimValue;
     public float fireValue;
 
     public Vector3 nextPosition;
@@ -32,12 +31,6 @@ public class PlayerController : MonoBehaviour
         _look = value.Get<Vector2>();
     }
 
-    public void OnAim(InputValue value)
-    {
-        aimValue = value.Get<float>();
-    }
-
-
     public void OnAttack(InputValue value)
     {
         fireValue = value.Get<float>();
@@ -47,9 +40,6 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        
-        Debug.Log("Firevalue: " + fireValue);
-        
         if (!Player.Instance.CanMove)
         {
             nextPosition = transform.position;
@@ -73,7 +63,6 @@ public class PlayerController : MonoBehaviour
 
         var angle = followTransform.transform.localEulerAngles.x;
 
-        //Clamp the Up/Down rotation
         if (angle > 180 && angle < 340)
         {
             angles.x = 340;
@@ -95,19 +84,10 @@ public class PlayerController : MonoBehaviour
         {
             playerAnimationController.SetAnimation(PlayerAnimationController.TypesOfAnimation.Idle);
             nextPosition = transform.position;
-
-            /*if (aimValue == 1)
-            {
-                //Set the player rotation based on the look transform
-                transform.rotation = Quaternion.Euler(0, followTransform.transform.rotation.eulerAngles.y, 0);
-                //reset the y rotation of the look transform
-                followTransform.transform.localEulerAngles = new Vector3(angles.x, 0, 0);
-            }*/
-
+            
             return;
         }
 
-        //движение
         float moveSpeed = speed / 100f;
         Vector3 position = (_playerModel.transform.forward * Math.Abs(_move.y) * moveSpeed) +
                            (_playerModel.transform.forward * Math.Abs(_move.x) * moveSpeed);
@@ -118,27 +98,29 @@ public class PlayerController : MonoBehaviour
 
         Vector3 newAngles = Vector3.zero;
 
-        float newAngleX;
-        float newAngleY;
+        float newAngleY = _move.y > 0 ? 0 : 180;
 
-        newAngleY = _move.y > 0 ? 0 : 180;
+        float newAngleX = _move.x > 0 ? 1 : -1;
 
-        newAngleX = _move.x > 0 ? 1 : -1;
-
-        if (_move.x > 0 || _move.x < 0)
+        switch (_move.x)
         {
-            if (_move.y == 0)
+            case > 0:
+            case < 0:
             {
-                newAngles.y += 90 * newAngleX;
+                if (_move.y == 0)
+                {
+                    newAngles.y += 90 * newAngleX;
+                }
+                else
+                {
+                    newAngles.y += (newAngleX * 90 + newAngleX * newAngleY) / 2;
+                }
+
+                break;
             }
-            else
-            {
-                newAngles.y += (newAngleX * 90 + newAngleX * newAngleY) / 2;
-            }
-        }
-        else if (_move.x == 0)
-        {
-            newAngles.y += newAngleY;
+            case 0:
+                newAngles.y += newAngleY;
+                break;
         }
 
 
@@ -146,10 +128,6 @@ public class PlayerController : MonoBehaviour
 
         _playerModel.transform.rotation = Quaternion.Lerp(_playerModel.transform.rotation, newQuaternion,
             Time.deltaTime * rotationLerp * 50);
-
-        //_playerModel.transform.localEulerAngles = new Vector3(0, angles.y + newAngles.y, 0);
-
-        //followTransform.transform.localEulerAngles = new Vector3(angles.x, 0, 0);
     }
 
     private void Attack()
