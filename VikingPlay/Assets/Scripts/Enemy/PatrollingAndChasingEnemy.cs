@@ -23,7 +23,6 @@ public class PatrollingAndChasingEnemy : MonoBehaviour
     private float _waitTimeAfterLostPlayer = 5f;
     private float _meshResolution = 1f;
     private int _edgeIterations = 4;
-    private float _edgeDistance = 0.5f;
 
     private int m_СurrentWayPointIndex;
 
