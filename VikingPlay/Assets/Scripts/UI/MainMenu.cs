@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private MainMenuBackGround _mainMenuBackGround;
 
 
+    
+    
     private void Awake()
     {
         Instance = this;
@@ -17,5 +20,20 @@ public class MainMenu : MonoBehaviour
     private void Start()
     {
         _mainMenuBackGround.CreateBackGround();
+    }
+
+    public void PlayGame()
+    {
+        SceneManager.LoadScene(1);
+    }
+
+    public void UIGame()
+    {
+        SceneManager.LoadScene(2);
+    }
+    
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 }

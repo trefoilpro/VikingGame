@@ -1,4 +1,3 @@
-using System.Collections;
 using Cinemachine;
 using UnityEngine;
 
@@ -16,9 +15,9 @@ public class GameStarter : MonoBehaviour
         Player player = Instantiate(_playerPrefab, _mapCenter.transform.position, Quaternion.identity);
         player.Initialize(1, 1);
 
-        /*_cinemachineVirtualCamera.LookAt = player.GetFollowTarget().transform;
+        _cinemachineVirtualCamera.LookAt = player.GetFollowTarget().transform;
         _cinemachineVirtualCamera.Follow = player.GetFollowTarget().transform;
 
-        _enemySpawner.SpawnEnemy(_numberOfEnemy, 1, 1, player.transform.position, 100f);*/
+        _enemySpawner.SpawnEnemy(_numberOfEnemy, 1, 1, player.transform.position, 100f);
     }
 }

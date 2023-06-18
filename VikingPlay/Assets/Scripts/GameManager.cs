@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private EnemySpawner _enemySpawner;
     [SerializeField] private GameStarter _gameStarter;
     [SerializeField] private Score _score;
+    [SerializeField] private GameOverMenu _gameOverMenu;
 
     private void Awake()
     {
@@ -19,5 +20,10 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         _gameStarter.StartGame();
+    }
+
+    public void GameOver()
+    {
+        _gameOverMenu.ShowGameOverMenu();
     }
 }

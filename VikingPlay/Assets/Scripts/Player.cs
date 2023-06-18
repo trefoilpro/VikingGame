@@ -9,7 +9,7 @@ public class Player : MonoBehaviour, ICharacter
     [SerializeField] private Collider _playerCollider;
     [SerializeField] private Rigidbody _playerRigidbody;
     public GameObject GetFollowTarget() => _followTarget;
-    
+    public bool IsDead { get; private set; }
     public int CurrentHealth { get; private set; }
     public int MaxHealth { get; set; }
     public int Damage { get; set; }
@@ -31,10 +31,12 @@ public class Player : MonoBehaviour, ICharacter
         
         if (CurrentHealth <= 0)
         {
+            IsDead = true;
             CanMove = false;
             _playerAnimationController.SetAnimation(PlayerAnimationController.TypesOfAnimation.Die);
             _playerCollider.enabled = false;
             _playerRigidbody.constraints = RigidbodyConstraints.FreezePosition;
+            GameManager.Instance.GameOver();
         }
     }
     

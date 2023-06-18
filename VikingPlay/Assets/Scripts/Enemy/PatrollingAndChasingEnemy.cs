@@ -53,6 +53,16 @@ public class PatrollingAndChasingEnemy : MonoBehaviour
 
     private void Update()
     {
+        if (Player.Instance != null )
+        {
+            if (Player.Instance.IsDead)
+            {
+                _navMeshAgent.isStopped = true;
+                _enemyAnimationsHandler.SetEnemyAnimation(EnemyAnimationsHandler.TypesOfAnimations.Idle);
+                this.enabled = false;
+                return;
+            }
+        }
         EnviromentView();
         
         if (!m_IsPatrol)
