@@ -3,6 +3,7 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private Enemy _enemyPrefab;
+    [SerializeField] private Camera _camera;
     
     public void SpawnEnemy(int numberOfEnemy, int enemyHealth, int enemyDamage, Vector3 spawnCenter, float spawnRadius)
     {
@@ -13,7 +14,7 @@ public class EnemySpawner : MonoBehaviour
             Vector3 spawnPosition = RandomPointGenerator.GetRandomPointOnNavMesh(spawnRadius, spawnCenter);
             Debug.Log("spawnPosition distance: " + Vector3.Distance(spawnPosition, spawnCenter));
             Enemy enemy = Instantiate(_enemyPrefab, spawnPosition, Quaternion.identity);
-            enemy.Initialize(enemyHealth, enemyDamage, this);
+            enemy.Initialize(enemyHealth, enemyDamage, this, _camera);
         }
     }
 }

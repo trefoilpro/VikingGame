@@ -173,7 +173,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a83182bfcfe62945909002ce85e6e41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyPrefab: {fileID: 8335200059966419254, guid: c1ea1abafe0b20e4cab4de46fe44635c, type: 3}
+  _enemyPrefab: {fileID: 6696387530768090386, guid: c1ea1abafe0b20e4cab4de46fe44635c, type: 3}
+  _camera: {fileID: 1623609085}
 --- !u!114 &102880815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,6 +277,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1082652225}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: ExitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 102880815}
+        m_TargetAssemblyTypeName: MainMenuBackGround, Assembly-CSharp
+        m_MethodName: StopAnimation
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -410,6 +423,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1082652225}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: PlayGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 102880815}
+        m_TargetAssemblyTypeName: MainMenuBackGround, Assembly-CSharp
+        m_MethodName: StopAnimation
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -747,6 +772,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1082652225}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: UIGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 102880815}
+        m_TargetAssemblyTypeName: MainMenuBackGround, Assembly-CSharp
+        m_MethodName: StopAnimation
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

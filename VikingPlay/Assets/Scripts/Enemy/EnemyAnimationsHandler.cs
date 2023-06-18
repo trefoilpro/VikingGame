@@ -74,4 +74,10 @@ public class EnemyAnimationsHandler : MonoBehaviour
     {
         _enemy.SetCanMove(true);
     }
+    
+    public void EndAnimationDie()
+    {
+        _enemy.GetHealthBar().gameObject.SetActive(false);
+        _enemy.SpawnHealthSphere();
+    }
 }
