@@ -16,16 +16,10 @@ public class PatrollingAndChasingEnemy : MonoBehaviour
     
     private Vector3 _currentWayPoint;
 
-    private float _distanceToFeelPlayer = 10f;
-    private float _timeToFeelPlayer = 3f;
 
     private float _waitTimeOnPatrolPoint = 2f;
     private float _waitTimeAfterLostPlayer = 5f;
-    private float _meshResolution = 1f;
-    private int _edgeIterations = 4;
-
-    private int m_СurrentWayPointIndex;
-
+    
     private Vector3 m_PlayerPosition;
     private float m_WaitTimeOnPatrolPoint;
     private float m_WaitTimeAfterLostPlayer;
@@ -39,9 +33,7 @@ public class PatrollingAndChasingEnemy : MonoBehaviour
         m_IsPatrol = true;
         m_WaitTimeOnPatrolPoint = _waitTimeOnPatrolPoint;
         m_WaitTimeAfterLostPlayer = _waitTimeAfterLostPlayer;
-
-        m_СurrentWayPointIndex = 0;
-
+        
         _navMeshAgent.isStopped = false;
         _navMeshAgent.speed = _speedWalk;
         Move(_speedWalk);
@@ -197,13 +189,7 @@ public class PatrollingAndChasingEnemy : MonoBehaviour
                     m_IsPatrol = false;
                 }
             }
-            else if (dstToPlayer <= _distanceToFeelPlayer)
-            {
-                if (!Physics.Raycast(transform.position, dirToPlayer, dstToPlayer, _obstacleMask))
-                {
-                    m_IsPatrol = false;
-                }
-            }
+            
 
             if (!m_IsPatrol)
             {
