@@ -58,7 +58,7 @@ public class PlayerAnimationController : MonoBehaviour
 
     private void OnAnimatorMove()
     {
-        Player.Instance.transform.position = _movement.nextPosition;
+        Player.Instance.transform.position = _movement.NextPosition;
     }
 
     public void OnStep()

@@ -8,6 +8,7 @@ public class Player : MonoBehaviour, ICharacter
     [SerializeField] private PlayerAnimationController _playerAnimationController;
     [SerializeField] private Collider _playerCollider;
     [SerializeField] private Rigidbody _playerRigidbody;
+    [SerializeField] private PlayerAudio _playerAudio;
 
     private HealthBar _healthBar;
     public GameObject GetFollowTarget() => _followTarget;
@@ -48,6 +49,8 @@ public class Player : MonoBehaviour, ICharacter
 
     public void AddHealth(int health)
     {
+        _playerAudio.PlayHealthSound();
+        
         if(CurrentHealth >= MaxHealth)
             return;
 

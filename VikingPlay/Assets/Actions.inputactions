@@ -33,9 +33,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Aim",
+                    "name": "Restart",
                     "type": "Button",
-                    "id": "a65414d1-b747-45aa-9ad6-111d6502c177",
+                    "id": "a3f70c5a-bdfe-4295-b467-e23ce0d04ceb",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -265,23 +265,12 @@
                 },
                 {
                     "name": "",
-                    "id": "bd3d697a-b71c-4949-8ce9-5a80117fb74a",
-                    "path": "<Gamepad>/leftTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Aim",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "2b05a988-4c50-454b-a1b1-d05fce6d7ed5",
-                    "path": "<Keyboard>/shift",
+                    "id": "08762643-1e52-48b3-ae31-9757fe38dacd",
+                    "path": "<Keyboard>/r",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Aim",
+                    "action": "Restart",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -8,6 +8,7 @@ public class PlayerAudio : MonoBehaviour
     [SerializeField] private AudioClip _dieSound;
     [SerializeField] private AudioClip _hitSound;
     [SerializeField] private AudioClip _attackSound;
+    [SerializeField] private AudioClip _healthSphereSound;
     [SerializeField] private AudioClip[] _footStepSounds;
     
     public void PlayFootStepSound()
@@ -28,5 +29,10 @@ public class PlayerAudio : MonoBehaviour
     public void PlayAttackSound()
     {
         _headAudioSource.PlayOneShot(_attackSound);
+    }
+
+    public void PlayHealthSound()
+    {
+        _headAudioSource.PlayOneShot(_healthSphereSound);
     }
 }

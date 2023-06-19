@@ -3,9 +3,6 @@ using UnityEngine;
 
 public class HealthSphere : MonoBehaviour
 {
-    [SerializeField] private AudioSource _audioSource;
-    [SerializeField] private AudioClip _healthSphereSound;
-    
     private int _givingHealth = 1;
     private Sequence _sphereAnimation;
     
@@ -25,7 +22,6 @@ public class HealthSphere : MonoBehaviour
             return;
         }
         
-        _audioSource.PlayOneShot(_healthSphereSound);
         _sphereAnimation.Kill();
         player.AddHealth(_givingHealth);
         Destroy(gameObject);

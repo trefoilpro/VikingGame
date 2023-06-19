@@ -1,4 +1,7 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
+
+[RequireComponent(typeof(PlayerInput))]
 
 public class GameManager : MonoBehaviour
 {
@@ -19,6 +22,11 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         _gameStarter.StartGame();
+    }
+
+    public void OnRestart()
+    {
+        _gameOverMenu.RestartGame();
     }
 
     public void GameOver()

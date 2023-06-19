@@ -8,18 +8,17 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private GameObject _playerModel;
     [SerializeField] private PlayerAnimationController playerAnimationController;
+    [SerializeField] private float speed = 1f;
+
     private NavMeshAgent _agent;
-    public Vector2 _move;
-    public Vector2 _look;
-    public float fireValue;
+    private Vector2 _move;
+    private Vector2 _look;
+    private float fireValue;
+    private Quaternion nextRotation;
+    private float rotationPower = 0.25f;
+    private float rotationLerp = 0.5f;
+    public Vector3 NextPosition { get; private set; }
 
-    public Vector3 nextPosition;
-    public Quaternion nextRotation;
-
-    public float rotationPower = 3f;
-    public float rotationLerp = 0.5f;
-
-    public float speed = 1f;
 
     public void OnMove(InputValue value)
     {
@@ -42,7 +41,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!Player.Instance.CanMove)
         {
-            nextPosition = transform.position;
+            NextPosition = transform.position;
             return;
         }
         
@@ -83,7 +82,7 @@ public class PlayerController : MonoBehaviour
         if (_move.x == 0 && _move.y == 0)
         {
             playerAnimationController.SetAnimation(PlayerAnimationController.TypesOfAnimation.Idle);
-            nextPosition = transform.position;
+            NextPosition = transform.position;
             
             return;
         }
@@ -91,7 +90,7 @@ public class PlayerController : MonoBehaviour
         float moveSpeed = speed / 100f;
         Vector3 position = (_playerModel.transform.forward * Math.Abs(_move.y) * moveSpeed) +
                            (_playerModel.transform.forward * Math.Abs(_move.x) * moveSpeed);
-        nextPosition = transform.position + position;
+        NextPosition = transform.position + position;
         
         playerAnimationController.SetAnimation(PlayerAnimationController.TypesOfAnimation.Run);
 
@@ -122,7 +121,6 @@ public class PlayerController : MonoBehaviour
                 newAngles.y += newAngleY;
                 break;
         }
-
 
         Quaternion newQuaternion = Quaternion.Euler(0, angles.y + newAngles.y, 0);
 
