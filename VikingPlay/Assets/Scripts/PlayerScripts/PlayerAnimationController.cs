@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerAnimationController : MonoBehaviour
 {
     [SerializeField] private PlayerController _movement;
+    [SerializeField] private PlayerAudio _playerAudio;
     private Animator _animator;
 
     public enum TypesOfAnimation
@@ -42,6 +43,7 @@ public class PlayerAnimationController : MonoBehaviour
     public void StartDealDamage()
     {
         Player.Instance.GetPlayerDamageDealer().StartDealingDamage();
+        OnAttack();
     }
     
     public void EndDealDamage()
@@ -58,6 +60,24 @@ public class PlayerAnimationController : MonoBehaviour
     {
         Player.Instance.transform.position = _movement.nextPosition;
     }
+
+    public void OnStep()
+    {
+        _playerAudio.PlayFootStepSound();
+    }
     
+    public void OnAttack()
+    {
+        _playerAudio.PlayAttackSound();
+    }
     
+    public void OnDie()
+    {
+        _playerAudio.PlayDieSound();
+    }
+
+    public void OnHit()
+    {
+        _playerAudio.PlayHitSound();
+    }
 }

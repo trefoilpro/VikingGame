@@ -29,6 +29,8 @@ public class Player : MonoBehaviour, ICharacter
     {
         CurrentHealth -= damage;
         
+        _playerAnimationController.OnHit();
+        
         if (CurrentHealth <= 0)
         {
             IsDead = true;
