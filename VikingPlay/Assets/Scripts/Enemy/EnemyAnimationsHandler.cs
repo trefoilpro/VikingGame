@@ -48,7 +48,6 @@ public class EnemyAnimationsHandler : MonoBehaviour
             case TypesOfAnimations.Attack:
             {
                 _enemyAnimator.SetTrigger("Attack");
-                //_enemyAnimator.Play("KillPlayer");
                 break;
             }
             case TypesOfAnimations.Die:

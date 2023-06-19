@@ -9,6 +9,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject _playerModel;
     [SerializeField] private PlayerAnimationController playerAnimationController;
     [SerializeField] private float speed = 1f;
+    
+    [SerializeField] private int maxBottomAngle = 60;
+    [SerializeField] private int maxTopAngle = 40;
 
     private NavMeshAgent _agent;
     private Vector2 _move;
@@ -61,14 +64,17 @@ public class PlayerController : MonoBehaviour
         angles.z = 0;
 
         var angle = followTransform.transform.localEulerAngles.x;
+        Debug.Log("Angle: " + angle);
 
-        if (angle > 180 && angle < 340)
+        
+        
+        if (angle > 180 && angle < 360 - maxBottomAngle)
         {
-            angles.x = 340;
+            angles.x = 360 - maxBottomAngle;
         }
-        else if (angle < 180 && angle > 40)
+        else if (angle < 180 && angle > maxTopAngle)
         {
-            angles.x = 40;
+            angles.x = maxTopAngle;
         }
 
 

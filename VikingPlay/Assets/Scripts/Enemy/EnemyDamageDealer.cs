@@ -3,11 +3,12 @@ using UnityEngine;
 
 public class EnemyDamageDealer : MonoBehaviour
 {
+    [SerializeField] private float _weaponLength;
+    [SerializeField] private Enemy _enemy;
+    
     private bool _canDealDamage;
     private List<GameObject> _hasDealtDamage;
 
-    [SerializeField] private float _weaponLength;
-    [SerializeField] private Enemy _enemy;
     private void Start()
     {
         _canDealDamage = false;
@@ -32,6 +33,8 @@ public class EnemyDamageDealer : MonoBehaviour
             }
         }
     }
+    
+    
     
     public void StartDealingDamage()
     {
